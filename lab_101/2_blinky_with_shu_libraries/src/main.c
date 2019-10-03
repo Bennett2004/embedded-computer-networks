@@ -20,6 +20,8 @@
 
 // map the led to GPIO PI1 (again, this is the inbuilt led)
 gpio_pin_t led = {PI_1, GPIOI, GPIO_PIN_1};
+gpio_pin_t led2 = {PB_14, GPIOB, GPIO_PIN_14};
+gpio_pin_t led3 = {PB_15, GPIOB, GPIO_PIN_15};
 
 // this is the main method
 int main()
@@ -31,12 +33,16 @@ int main()
   
   // initialise the gpio pins
   init_gpio(led, OUTPUT);
+	init_gpio(led2, OUTPUT);
+	init_gpio(led3, OUTPUT);
   
   // loop forever ...
   while(1)
   {
     // toggle the led on the gpio pin
     toggle_gpio(led);
+		toggle_gpio(led2);
+		toggle_gpio(led3);
     
     // wait for 1 second
     HAL_Delay(1000);

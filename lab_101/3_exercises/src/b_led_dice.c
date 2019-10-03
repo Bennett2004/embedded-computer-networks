@@ -15,8 +15,12 @@
 #include "random_numbers.h"
 
 // map the led to gpio pins
-gpio_pin_t led1 = {PA_8,  GPIOA, GPIO_PIN_8};
-
+gpio_pin_t led = {PI_1, GPIOI, GPIO_PIN_1};
+gpio_pin_t led2 = {PB_14, GPIOB, GPIO_PIN_14};
+gpio_pin_t led3 = {PB_15, GPIOB, GPIO_PIN_15};
+gpio_pin_t led4 = {PA_8,  GPIOA, GPIO_PIN_8};
+gpio_pin_t led5 = {PA_15,  GPIOA, GPIO_PIN_15};
+gpio_pin_t led6 = {PI_2,  GPIOI, GPIO_PIN_2};
 // this is the main method
 int main()
 {
@@ -24,5 +28,56 @@ int main()
   // properly
   HAL_Init();
   init_sysclk_216MHz();
+	
+	init_gpio(led, OUTPUT);
+	init_gpio(led2, OUTPUT);
+	init_gpio(led3, OUTPUT);
+	init_gpio(led4, OUTPUT);
+	init_gpio(led5, OUTPUT);
+	init_gpio(led6, OUTPUT);
+	
+	while(1)
+	{
+		uint32_t rnd = (get_random_int() % 6) + 1;
+		
+		if (rnd == 1)
+		{
+			toggle_gpio(led);
+			HAL_Delay(1000);
+		}
+		if (rnd == 2)
+		{
+			toggle_gpio(led);
+			toggle_gpio(led);
+			HAL_Delay(1000);
+		}
+		if (rnd == 3)
+		{
+			toggle_gpio(led);
+			toggle_gpio(led);
+			toggle_gpio(led);
+			HAL_Delay(1000);
+		}
+		if (rnd == 4)
+		{
+			toggle_gpio(led);
+			toggle_gpio(led);
+			toggle_gpio(led);
+			toggle_gpio(led);
+			HAL_Delay(1000);
+		}
+		if (rnd == 5)
+		{
+			toggle_gpio(led);
+			HAL_Delay(1000);
+		}
+		if (rnd == 6)
+		{
+			toggle_gpio(led);
+			HAL_Delay(1000);
+		}
+		
+		
+	}
 
 }
