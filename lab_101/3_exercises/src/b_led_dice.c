@@ -38,6 +38,8 @@ int main()
 	init_gpio(led5, OUTPUT);
 	init_gpio(led6, OUTPUT);
 	
+	uint32_t rnd;
+	
 	// init the random number generator
 	init_random();
 	
@@ -45,45 +47,59 @@ int main()
 	while(1)
 	{
 		// get a random number between 1 and 6
-		uint32_t rnd = (get_random_int() % 6) + 1;
+		rnd = (get_random_int() % 6) + 1;
 		
 		// make decisions based on the random number generated
-		if (rnd == 1)
+		switch(rnd)
 		{
-			toggle_gpio(led);
-			HAL_Delay(1000);
+			case 1:
+				write_gpio(led, HIGH);
+				break;
+			case 2:
+				write_gpio(led, HIGH);
+				write_gpio(led2, HIGH);
+				break;
+			case 3:
+				write_gpio(led, HIGH);
+				write_gpio(led2, HIGH);
+				write_gpio(led3, HIGH);
+				break;
+			case 4:
+				write_gpio(led, HIGH);
+				write_gpio(led2, HIGH);
+				write_gpio(led3, HIGH);
+				write_gpio(led4, HIGH);
+				break;
+			case 5:
+				write_gpio(led, HIGH);
+				write_gpio(led2, HIGH);
+				write_gpio(led3, HIGH);
+				write_gpio(led4, HIGH);
+				write_gpio(led5, HIGH);
+				break;
+			case 6:
+				write_gpio(led, HIGH);
+				write_gpio(led2, HIGH);
+				write_gpio(led3, HIGH);
+				write_gpio(led4, HIGH);
+				write_gpio(led5, HIGH);
+				write_gpio(led6, HIGH);
+				break;
 		}
-		if (rnd == 2)
-		{
-			toggle_gpio(led);
-			toggle_gpio(led);
-			HAL_Delay(1000);
-		}
-		if (rnd == 3)
-		{
-			toggle_gpio(led);
-			toggle_gpio(led);
-			toggle_gpio(led);
-			HAL_Delay(1000);
-		}
-		if (rnd == 4)
-		{
-			toggle_gpio(led);
-			toggle_gpio(led);
-			toggle_gpio(led);
-			toggle_gpio(led);
-			HAL_Delay(1000);
-		}
-		if (rnd == 5)
-		{
-			toggle_gpio(led);
-			HAL_Delay(1000);
-		}
-		if (rnd == 6)
-		{
-			toggle_gpio(led);
-			HAL_Delay(1000);
-		}
+		
+		HAL_Delay(1000);
+		
+		// reset all leds
+		write_gpio(led, LOW);
+		write_gpio(led2, LOW);
+		write_gpio(led3, LOW);
+		write_gpio(led4, LOW);
+		write_gpio(led5, LOW);
+		write_gpio(led6, LOW);
+		
+		HAL_Delay(1000);
+		
+				
 		
 		
 	}
