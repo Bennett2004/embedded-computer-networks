@@ -21,6 +21,7 @@ gpio_pin_t led3 = {PB_15, GPIOB, GPIO_PIN_15};
 gpio_pin_t led4 = {PA_8,  GPIOA, GPIO_PIN_8};
 gpio_pin_t led5 = {PA_15,  GPIOA, GPIO_PIN_15};
 gpio_pin_t led6 = {PI_2,  GPIOI, GPIO_PIN_2};
+
 // this is the main method
 int main()
 {
@@ -29,6 +30,7 @@ int main()
   HAL_Init();
   init_sysclk_216MHz();
 	
+	// init all the gpios for the dice dots
 	init_gpio(led, OUTPUT);
 	init_gpio(led2, OUTPUT);
 	init_gpio(led3, OUTPUT);
@@ -36,10 +38,16 @@ int main()
 	init_gpio(led5, OUTPUT);
 	init_gpio(led6, OUTPUT);
 	
+	// init the random number generator
+	init_random();
+	
+	// main loop
 	while(1)
 	{
+		// get a random number between 1 and 6
 		uint32_t rnd = (get_random_int() % 6) + 1;
 		
+		// make decisions based on the random number generated
 		if (rnd == 1)
 		{
 			toggle_gpio(led);
